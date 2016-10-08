@@ -17,7 +17,7 @@ class Controller
 
 			
 			$twig = new Twig_Environment($loader,array(
-					'cache' => ROOT_DIR.'/cache',
+				//	'cache' => ROOT_DIR.'/cache',
 					'debug' => DEBUG,
 				));
 			$template = $twig->loadTemplate($controller.'/'.$file.".php");

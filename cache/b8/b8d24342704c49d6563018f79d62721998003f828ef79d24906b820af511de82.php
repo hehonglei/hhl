@@ -21,6 +21,7 @@ class __TwigTemplate_6c9ba8fc92b0b4ecfcebfb2d0d7dde1c3e83721c80aa74da678a9006b5a
 <head>
 \t<meta charset=\"UTF-8\">
 \t<title>留言板</title>
+\t<link href=\"public/bootstrap/dist/css/bootstrap.min.css\" rel=\"stylesheet\">
 \t<link href=\"public/js/Dialog/skin/default.css\" rel=\"stylesheet\" />
 \t<script src=\"public/js/jquery.js\"></script>
 \t<script src=\"public/js/Dialog/artDialog.basic.js\"></script>
@@ -78,21 +79,21 @@ class __TwigTemplate_6c9ba8fc92b0b4ecfcebfb2d0d7dde1c3e83721c80aa74da678a9006b5a
 \t</div>
 \t<div class=\"content\">
 \t\t";
-        // line 62
+        // line 63
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable((isset($context["data"]) ? $context["data"] : null));
         foreach ($context['_seq'] as $context["_key"] => $context["item"]) {
-            // line 63
+            // line 64
             echo "\t\t\t<div class=\"one\" id=\"";
             echo twig_escape_filter($this->env, $this->getAttribute($context["item"], "id", array()), "html", null, true);
             echo "\">
 \t\t\t<div class=\"left\">
 \t\t\t\t<h4>";
-            // line 65
+            // line 66
             echo twig_escape_filter($this->env, $this->getAttribute($context["item"], "title", array()), "html", null, true);
             echo "</h4>
 \t\t\t\t<blockquote><p>";
-            // line 66
+            // line 67
             echo twig_escape_filter($this->env, $this->getAttribute($context["item"], "content", array()), "html", null, true);
             echo "</p><small><cite>";
             echo twig_escape_filter($this->env, $this->getAttribute($context["item"], "addtime", array()), "html", null, true);
@@ -105,8 +106,29 @@ class __TwigTemplate_6c9ba8fc92b0b4ecfcebfb2d0d7dde1c3e83721c80aa74da678a9006b5a
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['item'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 71
+        // line 72
         echo "\t</div>
+\t<div class=\"pagination pagination-right\">
+\t\t";
+        // line 74
+        $context['_parent'] = $context;
+        $context['_seq'] = twig_ensure_traversable(range(1, (isset($context["sum"]) ? $context["sum"] : null)));
+        foreach ($context['_seq'] as $context["_key"] => $context["i"]) {
+            echo "  
+        \t<a href=\"index.php?c=message&a=index&page=";
+            // line 75
+            echo twig_escape_filter($this->env, $context["i"], "html", null, true);
+            echo "\">";
+            echo twig_escape_filter($this->env, $context["i"], "html", null, true);
+            echo " </a>
+    \t";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['i'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 76
+        echo "  
+\t</div>
 </body>
 </html>
 <script type=\"text/javascript\">
@@ -147,7 +169,7 @@ class __TwigTemplate_6c9ba8fc92b0b4ecfcebfb2d0d7dde1c3e83721c80aa74da678a9006b5a
 
     public function getDebugInfo()
     {
-        return array (  109 => 71,  96 => 66,  92 => 65,  86 => 63,  82 => 62,  19 => 1,);
+        return array (  130 => 76,  120 => 75,  114 => 74,  110 => 72,  97 => 67,  93 => 66,  87 => 64,  83 => 63,  19 => 1,);
     }
 
     public function getSource()
@@ -157,6 +179,7 @@ class __TwigTemplate_6c9ba8fc92b0b4ecfcebfb2d0d7dde1c3e83721c80aa74da678a9006b5a
 <head>
 \t<meta charset=\"UTF-8\">
 \t<title>留言板</title>
+\t<link href=\"public/bootstrap/dist/css/bootstrap.min.css\" rel=\"stylesheet\">
 \t<link href=\"public/js/Dialog/skin/default.css\" rel=\"stylesheet\" />
 \t<script src=\"public/js/jquery.js\"></script>
 \t<script src=\"public/js/Dialog/artDialog.basic.js\"></script>
@@ -222,6 +245,11 @@ class __TwigTemplate_6c9ba8fc92b0b4ecfcebfb2d0d7dde1c3e83721c80aa74da678a9006b5a
 \t\t\t<div class=\"right\"></div>
 \t\t\t</div>
 \t\t{% endfor %}
+\t</div>
+\t<div class=\"pagination pagination-right\">
+\t\t{% for i in 1..sum %}  
+        \t<a href=\"index.php?c=message&a=index&page={{ i }}\">{{ i }} </a>
+    \t{% endfor %}  
 \t</div>
 </body>
 </html>

@@ -18,34 +18,38 @@ class Route{
 	private function __construct(){
 		$this->_controller = Config::getInstance()->get('app.defaultController');
 		$this->_action = Config::getInstance()->get('app.defaultAction');
+
+        //echo $path;die;
 		$this->_params = array();
 		$request = $_SERVER['REQUEST_URI'];
-		$url = parse_url($request);
-		if(isset($url['query']))
-		{
-			$params = explode('&',$url['query']);
-			foreach($params as $key=>$val){
-				$arr[] = explode('=',$val);
-			}
-			foreach($arr as $k=>$v)
-			{
-				$keys[] = $v[0];
-				$values[] = $v[1];
-			}
-			$params = array_combine($keys,$values);
+//      print_r($_SERVER);die;
+        preg_match_all('/\/(\w+)/',$request,$arr);
+			//$params = array_combine($keys,$values);
+			$this->_controller = !empty($arr[1][0])?$arr[1][0]:$this->_controller;
 
-		
-			$this->_controller = !empty($params['c'])?$params['c']:$this->_controller;
+			$this->_action = !empty($arr[1][1])?$arr[1][1]:$this->_action;
+        if(!empty($arr[1][0])&&!empty($arr[1][1])){
+            unset($arr[1][0]);
+            unset($arr[1][1]);
+        }
+        $keys=$values=[];
+        $arr=$arr[1];
+        if(!empty($arr)){
+            foreach($arr as $k=>$v){
+                if($k%2==0){
+                    $keys[]=$v;
+                }else{
+                    $values[]=$v;
+                }
+            }
+        }
 
-			$this->_action = !empty($params['a'])?$params['a']:$this->_action;
-			unset($params['c']);
-			unset($params['a']);
+        $params = array_combine($keys,$values);
 
-		
 			$this->_params = $params;
 		}
-	
-	}
+
+
 
 	public function route()
 	{
